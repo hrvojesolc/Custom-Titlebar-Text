@@ -21,7 +21,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["custom_titlebar_text.js"]
+      "js": ["custom-titlebar-text.js"]
     }
   ]
 
