@@ -1,0 +1,28 @@
+{
+
+  "manifest_version": 2,
+  "name": "Custom Titlebar Text",
+  "version": "0.1",
+
+  "description": "Changes the titlebar text (used in window name) via document.title property.",
+
+  "icons": {
+    "16": "icons/custom_titlebar_text-16.png",
+    "20": "icons/custom_titlebar_text-20.png",
+    "24": "icons/custom_titlebar_text-24.png",
+    "32": "icons/custom_titlebar_text-32.png",
+    "48": "icons/custom_titlebar_text-48.png",
+    "64": "icons/custom_titlebar_text-64.png",
+    "128": "icons/custom_titlebar_text-128.png",
+    "256": "icons/custom_titlebar_text-256.png",
+    "512": "icons/custom_titlebar_text-512.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["custom_titlebar_text.js"]
+    }
+  ]
+
+}
