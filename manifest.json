@@ -4,7 +4,7 @@
   "name": "Custom Titlebar Text",
   "version": "0.1",
 
-  "description": "Changes the titlebar text (used in window name) via document.title property.",
+  "description": "Changes the titlebar text (used in window name) via document.title property. (port-old-plugin)",
 
   "icons": {
     "16": "icons/custom_titlebar_text-16.png",
