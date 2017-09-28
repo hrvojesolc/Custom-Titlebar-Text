@@ -21,3 +21,18 @@ var docTitleNew = "ff - " + domain + " - " + docTitleOld + " - " + url;
 
 // Replace document title with new
 document.title = docTitleNew;
+
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+function onGot(item) {
+  var color = "blue";
+  if (item.color) {
+    color = item.color;
+  }
+  document.body.style.border = "10px solid " + color;
+}
+
+var getting = browser.storage.local.get("color");
+getting.then(onGot, onError);
