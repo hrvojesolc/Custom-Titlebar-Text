@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Custom Titlebar Text",
-  "version": "0.1a",
+  "version": "0.2",
 
   "description": "Changes the titlebar text (used in window name) via document.title property. (port-old-plugin)",
 
