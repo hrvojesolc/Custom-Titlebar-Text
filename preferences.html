@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="preferences.css">
+</head>
+
+<body>
+
+Preferences (check homepage for help):<hr />
+
+<form id="preferences">
+
+<div class="preference-label"><input type="radio" id="SelectedFormat" name="SelectedFormat" value="Default" checked />Default</div>
+<div class="preference-field">{PageTitle} - {PageUrl}</div>
+<br />
+
+<div class="preference-label"><input type="radio" id="SelectedFormat" name="SelectedFormat" value="PageTitle" />Page title</div>
+<div class="preference-field">{PageTitle}</div>
+<br />
+
+<div class="preference-label"><input type="radio" id="SelectedFormat" name="SelectedFormat" value="Developers" />For developers</div>
+<div class="preference-field">{PageTitle} - {PageUrl} - {FirefoxVersion} - {FirefoxBuild}</div>
+<br />
+
+<div class="preference-label"><input type="radio" id="SelectedFormat" name="SelectedFormat" value="Custom" />Custom</div>
+<div class="preference-field"><input type="text" id="CustomFormat" name="CustomFormat"></div>
+
+<br />
+<div class="preference-field">Select property below to append it to above field:<br />
+<select id="CustomVariable" name="CustomVariable">
+  <option value="{PageTitle}">{PageTitle} - Page title</option>
+  <option value="{PageUrl}">{PageUrl} - Full URL of page</option>
+  <option value="{PageDomain}">{PageDomain} - Page domain or subdomain</option>
+  <option value="{FirefoxVersion}">{FirefoxVersion} - Firefox version number</option>
+  <option value="{FirefoxBuild}">{FirefoxBuild} - Firefox build number</option>
+</select>
+</div>
+
+<br />
+<button type="submit">Save</button>
+
+</form>
+
+<script src="preferences.js"></script>
+
+</body>
+</html>

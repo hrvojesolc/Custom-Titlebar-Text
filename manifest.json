@@ -2,9 +2,20 @@
 
   "manifest_version": 2,
   "name": "Custom Titlebar Text",
-  "version": "0.1",
+  "description": "Customize titlebar text according to a rule. This changes the active window title and is useful for auto-type programs such as KeePass for entering correct account credentials.",
+  "version": "0.2.1.4",
+  "author": "Hrvoje Šolc",
+  "developer": {
+    "name": "Hrvoje Šolc",
+    "url": "https://github.com/hrvojesolc/Custom-Titlebar-Text"
+  },
+  "homepage_url": "https://github.com/hrvojesolc/Custom-Titlebar-Text",
 
-  "description": "Changes the titlebar text (used in window name) via document.title property.",
+  "applications": {
+    "gecko": {
+      "id": "{b5a43a70-4092-4899-9c44-63799150b35e}"
+    }
+  },
 
   "icons": {
     "16": "icons/custom_titlebar_text-16.png",
@@ -23,6 +34,13 @@
       "matches": ["<all_urls>"],
       "js": ["custom-titlebar-text.js"]
     }
-  ]
+  ],
+
+  "options_ui": {
+    "page": "preferences.html",
+    "browser_style": true
+  },
+
+  "permissions": ["storage"]
 
 }
