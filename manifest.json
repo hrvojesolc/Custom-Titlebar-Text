@@ -2,8 +2,8 @@
 
   "manifest_version": 2,
   "name": "Custom Titlebar Text",
-  "description": "Changes the titlebar text (used in window name) via document.title property. (port-old-plugin)",
-  "version": "0.2.1.1",
+  "description": "Customize titlebar text according to a rule. This changes the active window title and is useful for auto-type programs such as KeePass for entering correct account credentials.",
+  "version": "0.2.1.4",
   "author": "Hrvoje Šolc",
   "developer": {
     "name": "Hrvoje Šolc",

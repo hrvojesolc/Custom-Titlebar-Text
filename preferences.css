@@ -1,0 +1,14 @@
+* { font-size: medium; !important }
+
+.preference-label {
+    float: left;
+    width: 200px;
+}
+
+.preference-field {
+    margin-left: 200px;
+}
+
+.preference-field input {
+    width: 200px;
+}

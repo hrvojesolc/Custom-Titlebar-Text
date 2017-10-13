@@ -16,23 +16,25 @@ var domain = window.location.hostname;
 var pathname = window.location.pathname;
 var url = window.location.href;
 
-// Compose new document title
-var docTitleNew = "ff - " + domain + " - " + docTitleOld + " - " + url;
-
-// Replace document title with new
-document.title = docTitleNew;
-
 function onError(error) {
   console.log(`Error: ${error}`);
 }
 
+var selectedFormat = "Default1";
+
 function onGot(item) {
-  var color = "blue";
-  if (item.color) {
-    color = item.color;
+  var selectedFormat = "Default2";
+  if (item.selectedFormat) {
+    selectedFormat = item.selectedFormat;
   }
-  document.body.style.border = "10px solid " + color;
+  //document.body.style.border = "10px solid " + color;
 }
 
-var getting = browser.storage.local.get("color");
+var getting = browser.storage.local.get("selectedFormat");
 getting.then(onGot, onError);
+
+// Compose new document title
+var docTitleNew = "ff - " + selectedFormat + " - " + domain + " - " + url;
+
+// Replace document title with new
+document.title = docTitleNew;
