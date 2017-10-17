@@ -35,7 +35,7 @@ function restorePreferences() {
 
     // Debug logging
     if (debug) {
-      console.log('Tried to restore value: ' + loadedSelectedFormat);
+      console.log('Tried to restore "loadedSelectedFormat" value: ' + loadedSelectedFormat);
     }
 
     // Get all the elements (radio buttons)
@@ -54,15 +54,16 @@ function restorePreferences() {
 
     }
 
+    // Debug logging
+    if (debug) {
+      console.log('Tried to restore selection for preference name: ' + loadedSelectedFormat);
+    }
+
+    // Disable or enable custom fields depending if custom preference is current preference or not
     if (isCustomChecked) {
       enableCustom();
     } else {
       disableCustom();
-    }
-
-    // Debug logging
-    if (debug) {
-      console.log('Tried to restore checkmark for element with ID: ' + loadedSelectedFormat);
     }
 
   }
@@ -73,17 +74,12 @@ function restorePreferences() {
     // Load saved radio selection preference or "Default" if it wasn't previously set
     var loadedCustomFormat = result.CustomFormat || '{PageTitle} - {PageUrl}';
 
-    // Debug logging
-    if (debug) {
-      console.log('Tried to restore value: ' + loadedCustomFormat);
-    }
-
     // Populate CustomFormat textbox with loaded data
     document.querySelector('#CustomFormat').value = loadedCustomFormat;
 
     // Debug logging
     if (debug) {
-      console.log('Tried to restore checkmark for element with ID: ' + loadedCustomFormat);
+      console.log('Tried to restore "loadedCustomFormat" value: ' + loadedCustomFormat);
     }
 
   }
@@ -101,11 +97,6 @@ function restorePreferences() {
   GetSelectedFormat.then(setSelectedFormat, onError);
   GetCustomFormat.then(setCustomFormat, onError);
 
-  // Debug logging
-  if (debug) {
-    console.log('Completed restoring preferences.');
-  }
-
 }
 
 // Function to restore preferences (when they are displayed)
@@ -116,7 +107,7 @@ function changePreferences() {
 
   // Debug logging
   if (debug) {
-    console.log('Preference change triggered.');
+    console.log('Preference change has been triggered by user.');
   }
 
   // Get all the elements (radio buttons)
@@ -132,6 +123,7 @@ function changePreferences() {
 
   }
 
+  // Disable or enable custom fields depending if custom preference is current preference or not
   if (isCustomChecked) {
     enableCustom();
   } else {
@@ -145,7 +137,7 @@ function enableCustom() {
 
   // Debug logging
   if (debug) {
-    console.log('Enabled custom preference.');
+    console.log('Enabling custom fields because custom preference is checked.');
   }
 
   document.getElementById('CustomFormat').disabled = false;
@@ -158,7 +150,7 @@ function disableCustom() {
 
   // Debug logging
   if (debug) {
-    console.log('Disabled custom preferece.');
+    console.log('Disabling custom fields because custom preference is not checked.');
   }
 
   document.getElementById('CustomFormat').disabled = true;
@@ -169,9 +161,14 @@ function disableCustom() {
 // Function to append a custom variable to custom textbox
 function appendVariable() {
 
+  // Get the current value of the custom format text box to be apended
   var currentValue = document.querySelector('#CustomFormat').value;
 
-  document.querySelector('#CustomFormat').value = currentValue + document.getElementById('CustomVariable').value;
+  // Update the custom format text box with existing value plus appended selected value from a drop-down
+  // ONLY IF VALID SELECTION IS MADE
+  if (document.getElementById('CustomVariable').value != 'NOT_SELECTED') {
+    document.querySelector('#CustomFormat').value = currentValue + document.getElementById('CustomVariable').value;
+  }
 
   // Debug logging
   if (debug) {
