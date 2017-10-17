@@ -1,40 +1,120 @@
 /*
+ * Custom Titlebar Text
+ *
+ * Mozilla Firefox add-on lets you customize the
+ * titlebar text according to a rule. This changes
+ * the active window title and is useful for
+ * auto-type programs such as KeePass for entering
+ * correct account credentials.
+ *
+ * Source code: https://github.com/hrvojesolc/Custom-Titlebar-Text
+ * Add-on listing: https://addons.mozilla.org/firefox/addon/custom-titlebar-text
+ *
+ */
 
-Rewrites document.title to the following format
+// Set debug variable to true to enable console logging
+var debug = false;
 
-"ff - {domainName} - {originalDocumentTitle} - {fullUrl}"
+// Debug logging
+if (debug) {
+  console.log('Debugging enabled.');
+}
 
-*/
-
-// Get current document title after page loads
-var docTitleOld = document.title;
-
-// Get the domain of the document
-var domain = window.location.hostname;
-
-// Get path and full URL of the document
-var pathname = window.location.pathname;
-var url = window.location.href;
-
+// Error handling function
 function onError(error) {
   console.log(`Error: ${error}`);
 }
 
-var selectedFormat = "Default1";
+// Get current document title after page loads
+var currentDocumentTitle = document.title;
 
-function onGot(item) {
-  var selectedFormat = "Default2";
-  if (item.selectedFormat) {
-    selectedFormat = item.selectedFormat;
-  }
-  //document.body.style.border = "10px solid " + color;
+// Debug logging
+if (debug) {
+  console.log('Got current document title: ' + currentDocumentTitle);
 }
 
-var getting = browser.storage.local.get("selectedFormat");
-getting.then(onGot, onError);
+// Default variables
+var SelectedFormat = 'Default';
+var CustomFormat = '{PageTitle}';
 
-// Compose new document title
-var docTitleNew = "ff - " + selectedFormat + " - " + domain + " - " + url;
+// Load current extension preference
+var GetSelectedFormat = browser.storage.local.get('SelectedFormat');
+GetSelectedFormat.then(loadSelectedFormat, onError);
 
-// Replace document title with new
-document.title = docTitleNew;
+// Execute based on extension preferences
+function loadSelectedFormat(result) {
+
+  // Load current extension preference into a variable
+  var loadedSelectedFormat = result.SelectedFormat || 'Default';
+
+  // Debug logging
+  if (debug) {
+    console.log('Tried to restore "loadedSelectedFormat" value: ' + loadedSelectedFormat);
+  }
+
+  // If preference was Custom, perform variable substitutions based on custom format specified
+  if (loadedSelectedFormat == 'Custom') {
+
+    // Load current extension preference into a variable
+    var GetCustomFormat = browser.storage.local.get('CustomFormat');
+    GetCustomFormat.then(loadCustomFormat, onError);
+
+    // Execute based on custom format preference
+    function loadCustomFormat(result) {
+
+      // Variable for new document title
+      var newDocumentTitle = '';
+
+      // Load current extension preference into a variable
+      var loadedCustomFormat = result.CustomFormat || '{PageTitle}';
+
+      // Debug logging
+      if (debug) {
+        console.log('Tried to restore "loadedCustomFormat" value: ' + loadedCustomFormat);
+      }
+
+      // Perform substitutions for '{PageTitle}' in initial loadedCustomFormat variable
+      newDocumentTitle = loadedCustomFormat.replace('{PageTitle}', currentDocumentTitle);
+
+      // Perform substitution for '{PageUrl}' with full URL of page
+      newDocumentTitle = newDocumentTitle.replace('{PageUrl}', window.location.href);
+
+      // Perform substitution for '{PageDomain}'
+      newDocumentTitle = newDocumentTitle.replace('{PageDomain}', convertUrlToDomain(window.location.href));
+
+      // Set new document title
+      document.title = newDocumentTitle;
+
+    }
+
+  // If preference was not Custom, process defaults
+  } else {
+
+    // Leave default document title (do nothing).
+    // This isn't necessary and could be removed in future.
+    document.title = currentDocumentTitle;
+
+  }
+
+}
+
+// Function to convert URL to a subdomain (this is oversimplified and may not work on international TLDs)
+function convertUrlToDomain(url, subdomain) {
+
+    subdomain = subdomain || false;
+
+    url = url.replace(/(https?:\/\/)?(www.)?/i, '');
+
+    if (!subdomain) {
+        url = url.split('.');
+
+        url = url.slice(url.length - 2).join('.');
+    }
+
+    if (url.indexOf('/') !== -1) {
+        return url.split('/')[0];
+    }
+
+    return url;
+
+}

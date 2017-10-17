@@ -1,4 +1,4 @@
-* { font-size: medium; !important }
+* { font-size: medium; }
 
 .preference-label {
     float: left;
@@ -10,5 +10,5 @@
 }
 
 .preference-field input {
-    width: 200px;
+    width: 400px;
 }
