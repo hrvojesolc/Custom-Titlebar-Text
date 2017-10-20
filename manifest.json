@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Custom Titlebar Text",
   "description": "Mozilla Firefox add-on lets you customize the titlebar text according to a rule. This changes the active window title and is useful for auto-type programs such as KeePass for entering correct account credentials.",
-  "version": "0.2.1.6",
+  "version": "0.2.1.7",
   "author": "Hrvoje Šolc",
   "developer": {
     "name": "Hrvoje Šolc",

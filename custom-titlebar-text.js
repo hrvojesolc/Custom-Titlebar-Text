@@ -82,6 +82,9 @@ function loadSelectedFormat(result) {
       // Perform substitution for '{PageDomain}'
       newDocumentTitle = newDocumentTitle.replace('{PageDomain}', convertUrlToDomain(window.location.href));
 
+      // Perform substitution for '{PageHostname}'
+      newDocumentTitle = newDocumentTitle.replace('{PageHostname}', window.location.hostname);
+
       // Set new document title
       document.title = newDocumentTitle;
 
