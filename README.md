@@ -5,6 +5,7 @@
 > KeePassXC password manager program and KeePassXC-Browser add-on for Firefox accomplish what was intended with this add-on.
 >
 > https://keepassxc.org/
+>
 > https://addons.mozilla.org/en-US/firefox/addon/keepassxc-browser/
 
 Mozilla Firefox add-on lets you customize the titlebar text according to a rule. This changes the active window title and is useful for auto-type programs such as KeePass for entering correct account credentials.
